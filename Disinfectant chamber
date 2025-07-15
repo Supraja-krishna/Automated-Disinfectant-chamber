@@ -1,0 +1,106 @@
+
+#include<Servo.h>
+char val;
+int sensor1;
+int sensor2;
+int sensor3;
+int blower=1;
+int door1=1;
+int door2=1;
+int uv=1;
+int c,i, j;
+int pos=0; 
+//const unsigned long eventTime_T1=1000;
+//const unsigned long eventTime_T2=5000;
+unsigned long prevTime_T6=millis();
+unsigned long prevTime_T7=millis();
+unsigned long prevTime_T1=millis ();
+unsigned long prevTime_T2=millis();
+unsigned long prevTime_T3=millis();
+unsigned long prevTime_T4=millis();
+long interval_T6=3000;
+long interval_T1=13000;
+long interval_T7=30000;
+long interval_T2=38000;
+long interval_T3=48000;
+long interval_T4=53000;
+Servo myservo1;
+Servo myservo2;
+
+void setup()
+
+{
+pinMode(13,OUTPUT);
+pinMode(12,OUTPUT);
+pinMode(11,OUTPUT);
+pinMode(10,OUTPUT);
+pinMode(7,INPUT);
+pinMode(6,INPUT);
+pinMode(5,INPUT);
+pinMode(4,INPUT);
+Serial.begin(9600);
+myservo1.attach(9);
+myservo2.attach(8);
+ }
+
+void loop()
+{
+{ 
+   unsigned long currentTime=millis(); 
+   sensor1=digitalRead(7);
+   sensor2=digitalRead(6);
+   sensor3=digitalRead(5);
+   digitalWrite(12,door1);
+   digitalWrite(13,door2);
+  digitalWrite(11, blower);
+  digitalWrite(10,uv);
+
+ {{ 
+
+//task1:        
+    {if (! sensor1&&door1&&door2&&blower&&uv){door2=0;
+{for (pos = 0; pos <= 90; pos += 1) {// goes from 0 degrees to 90 degrees
+                                            // in steps of 1 degree
+            myservo2.write(pos);// tell servo to go to position in variable 'pos'
+            delay(15);// waits 15ms for the servo to reach the position
+         }
+       //for(pos = 90; pos >= 0; pos -= 1) {// goes from 90 degrees to 0 degrees
+           //   myservo2.write(pos); // tell servo to go to position in variable 'pos'
+             // delay(15);}}
+                                     }}
+If(sensor1&&!door2&&door1&&blower&&uv)
+        {if(currentTime-prevTime_T1>interval_T1){ 
+           door1=0;
+           blower=0;
+           prevTime_T1=currentTime;}} 
+
+      if(!door1&&!door2&&!blower&&uv)  
+            {if (currentTime-prevTime_T2>interval_T2)
+             {uv=0;
+              blower=1;
+                  prevTime_T2=currentTime;}}
+
+     if(!uv&&blower&&!door1&&!door2)  
+             {if (currentTime-prevTime_T3>interval_T3)
+             {uv=1;
+                prevTime_T3=currentTime;}} 
+
+    if (!sensor3&&uv&blower)
+       {for (pos = 0; pos <= 90; pos += 1) {// goes from 0 degrees to 90 degrees
+                                            // in steps of 1 degree
+            myservo1.write(pos);// tell servo to go to position in variable 'pos'
+            delay(15);}// waits 15ms for the servo to reach the position
+         for (pos = 90; pos >= 0; pos -= 1) {// goes from 90 degrees to 0 degrees
+              myservo1.write(pos); // tell servo to go to position in variable 'pos'
+              delay(15);}}    
+      if(!sensor3)          
+          {door1=1;
+          door2=1;
+          for (pos = 90; pos >= 0; pos -= 1) {/ goes from 90 degrees to 0 degrees
+             myservo2.write(pos);// tell servo to go to position in variable 'pos'
+              delay(15);}}}
+    if(!sensor2)door1=0;
+    if(sensor2&&!door1&&door2)door1=1;      
+} }
+} }
+
